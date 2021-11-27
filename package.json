@@ -1,0 +1,46 @@
+{
+  "name": "absence-manager",
+  "version": "1.0.0",
+  "engines": {"node": "16.12.0"},
+  "description": "Repository for absence manager",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint src --ext .js,ts --max-warnings 0",
+    "lint:fix": "npm run lint -- --fix",
+    "start": "node --inspect=0.0.0.0:9230 -r ts-node/register ./src/server.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/prathap0611/absence-manager.git"
+  },
+  "keywords": [
+    "absense"
+  ],
+  "author": "prathap0611@gmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/prathap0611/absence-manager/issues"
+  },
+  "homepage": "https://github.com/prathap0611/absence-manager#readme",
+  "devDependencies": {
+    "@types/express": "^4.17.13",
+    "@types/node": "^16.11.10",
+    "@typescript-eslint/eslint-plugin": "^5.4.0",
+    "@typescript-eslint/parser": "^5.4.0",
+    "eslint": "^8.3.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-promise": "^5.1.1",
+    "prettier": "^2.5.0",
+    "ts-node": "^10.4.0",
+    "typescript": "^4.5.2"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "helmet": "^4.6.0",
+    "winston": "^3.3.3"
+  }
+}
