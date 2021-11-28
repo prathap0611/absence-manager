@@ -59,4 +59,48 @@ describe('Absentee manager tests', () => {
         expect(data.limit).toEqual(10);
         expect(Array.isArray(data.results)).toEqual(true);
     });
+
+    it('Should return error for invalid offset ', async () => {
+        await request(app)
+            .get('/absentees')
+            .query({
+                offset: 'not a number',
+            })
+            .set('Accept', 'application/json')
+            .expect('Content-Type', /json/)
+            .expect(400);
+    });
+
+    it('Should return error for invalid type ', async () => {
+        await request(app)
+            .get('/absentees')
+            .query({
+                type: 'invalid type',
+            })
+            .set('Accept', 'application/json')
+            .expect('Content-Type', /json/)
+            .expect(400);
+    });
+
+    it('Should return error for invalid date ', async () => {
+        await request(app)
+            .get('/absentees')
+            .query({
+                date: 'some date',
+            })
+            .set('Accept', 'application/json')
+            .expect('Content-Type', /json/)
+            .expect(400);
+    });
+
+    it('Should return error for invalid limit ', async () => {
+        await request(app)
+            .get('/absentees')
+            .query({
+                limit: 'not a number',
+            })
+            .set('Accept', 'application/json')
+            .expect('Content-Type', /json/)
+            .expect(400);
+    });
 });
