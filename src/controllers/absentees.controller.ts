@@ -1,3 +1,4 @@
+import moment from 'moment';
 import {
     AbsenteeModel,
     AbsenteeStatus,
@@ -43,6 +44,7 @@ export function getAbsentees(
     page: PageInput,
     filter: {
         type?: AbsenteeType;
+        date?: string;
     }
 ): PageResults<Absentee> {
     const absenteesModel = getAbsenteesModel();
@@ -50,6 +52,17 @@ export function getAbsentees(
     if (filter.type) {
         filteredResults = absenteesModel.filter((absentee) => {
             return absentee.type === filter.type;
+        });
+    }
+    if (filter.date) {
+        filteredResults = filteredResults.filter((absentee) => {
+            const isDateInRange = moment(filter.date).isBetween(
+                absentee.startDate,
+                absentee.endDate,
+                'days',
+                '[]'
+            );
+            return isDateInRange;
         });
     }
     const paginatedAbsenteesModel = paginate(filteredResults, page);

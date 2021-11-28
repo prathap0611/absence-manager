@@ -45,4 +45,18 @@ describe('Absentee manager tests', () => {
             expect(result.type).toEqual('vacation');
         });
     });
+
+    it('Should filter list of absentees by date', async () => {
+        const response = await request(app)
+            .get('/absentees')
+            .query({ date: '2021-06-26' })
+            .set('Accept', 'application/json')
+            .expect('Content-Type', /json/);
+
+        const data = response.body;
+
+        expect(data.offset).toEqual(0);
+        expect(data.limit).toEqual(10);
+        expect(Array.isArray(data.results)).toEqual(true);
+    });
 });

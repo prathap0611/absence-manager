@@ -48,6 +48,7 @@
   "dependencies": {
     "express": "^4.17.1",
     "helmet": "^4.6.0",
+    "moment": "^2.29.1",
     "winston": "^3.3.3"
   },
   "jest": {

@@ -10,7 +10,10 @@ export function buildAbsenteesRoutes(): Router {
         const limit = parseInt((req.query.limit as string) || '10');
         const absentees = getAbsentees(
             { offset, limit },
-            { type: req.query.type as AbsenteeType }
+            {
+                type: req.query.type as AbsenteeType,
+                date: req.query.date as string,
+            }
         );
         res.send(absentees);
     });
