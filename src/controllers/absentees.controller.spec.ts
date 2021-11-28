@@ -1,4 +1,3 @@
-import moment from 'moment';
 import { AbsenteeModel } from '../model/absentees.model';
 import { PageResults } from '../utils/pagination';
 import { Absentee, getAbsentees } from './absentees.controller';
