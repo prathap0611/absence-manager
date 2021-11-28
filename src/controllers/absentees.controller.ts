@@ -1,19 +1,9 @@
-import { AbsenteeModel, getAbsenteesModel } from '../model/absentees.model';
-
-export type AbsenteeStatus = 'Requested' | 'Confirmed' | 'Rejected';
-
-function getAbsenteeStatus({
-    rejectedAt,
-    confirmedAt,
-}: AbsenteeModel): AbsenteeStatus {
-    if (rejectedAt) {
-        return 'Rejected';
-    } else if (confirmedAt) {
-        return 'Confirmed';
-    } else {
-        return 'Requested';
-    }
-}
+import {
+    AbsenteeModel,
+    AbsenteeStatus,
+    getAbsenteesModel,
+} from '../model/absentees.model';
+import { PageInput, PageResults, paginate } from '../utils/pagination';
 
 export interface Absentee {
     id: number;
@@ -26,18 +16,35 @@ export interface Absentee {
     admitterNote: string;
 }
 
-export function getAbsentees(): Absentee[] {
+function transformAbsenteeFromModel({
+    id,
+    userId,
+    type,
+    memberNote,
+    status,
+    admitterNote,
+    startDate,
+    endDate,
+}: AbsenteeModel): Absentee {
+    return {
+        id,
+        userId,
+        type,
+        memberNote,
+        status,
+        admitterNote,
+        startDate,
+        endDate,
+    };
+}
+
+export function getAbsentees(page: PageInput): PageResults<Absentee> {
     const absenteesModel = getAbsenteesModel();
-    return absenteesModel.map((data) => {
-        return {
-            id: data.id,
-            userId: data.userId,
-            type: data.type,
-            memberNote: data.memberNote,
-            status: getAbsenteeStatus(data),
-            admitterNote: data.admitterNote,
-            startDate: data.startDate,
-            endDate: data.endDate,
-        };
-    });
+    const paginatedAbsenteesModel = paginate(absenteesModel, page);
+    return {
+        ...paginatedAbsenteesModel,
+        results: paginatedAbsenteesModel.results.map((data) =>
+            transformAbsenteeFromModel(data)
+        ),
+    };
 }
