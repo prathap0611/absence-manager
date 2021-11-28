@@ -1,6 +1,7 @@
 import {
     AbsenteeModel,
     AbsenteeStatus,
+    AbsenteeType,
     getAbsenteesModel,
 } from '../model/absentees.model';
 import { PageInput, PageResults, paginate } from '../utils/pagination';
@@ -8,7 +9,7 @@ import { PageInput, PageResults, paginate } from '../utils/pagination';
 export interface Absentee {
     id: number;
     userId: number;
-    type: string;
+    type: AbsenteeType;
     startDate: string | null;
     endDate: string | null;
     memberNote: string;
@@ -38,9 +39,20 @@ function transformAbsenteeFromModel({
     };
 }
 
-export function getAbsentees(page: PageInput): PageResults<Absentee> {
+export function getAbsentees(
+    page: PageInput,
+    filter: {
+        type?: AbsenteeType;
+    }
+): PageResults<Absentee> {
     const absenteesModel = getAbsenteesModel();
-    const paginatedAbsenteesModel = paginate(absenteesModel, page);
+    let filteredResults = absenteesModel;
+    if (filter.type) {
+        filteredResults = absenteesModel.filter((absentee) => {
+            return absentee.type === filter.type;
+        });
+    }
+    const paginatedAbsenteesModel = paginate(filteredResults, page);
     return {
         ...paginatedAbsenteesModel,
         results: paginatedAbsenteesModel.results.map((data) =>

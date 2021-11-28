@@ -83,7 +83,102 @@ describe('absentees controller spec', () => {
                 },
             ],
         };
-        const absentees = getAbsentees({ offset: 1, limit: 2 });
+        const absentees = getAbsentees({ offset: 1, limit: 2 }, {});
+        expect(absentees).toEqual(expectedResult);
+    });
+
+    it('should filter absentees by type', () => {
+        const absenteeMock: AbsenteeModel = {
+            admitterId: null,
+            admitterNote: '',
+            confirmedAt: '2020-12-12T18:03:55.000+01:00',
+            createdAt: '2020-12-12T14:17:01.000+01:00',
+            crewId: 352,
+            endDate: '2021-01-13',
+            id: 2351,
+            memberNote: '',
+            rejectedAt: null,
+            startDate: '2021-01-13',
+            type: 'sickness',
+            userId: 1,
+            status: 'Confirmed',
+        };
+
+        const mockedAbsenteesModel: AbsenteeModel[] = [
+            {
+                ...absenteeMock,
+                id: 1,
+                userId: 1,
+                type: 'sickness',
+            },
+            {
+                ...absenteeMock,
+                id: 2,
+                userId: 2,
+                type: 'sickness',
+            },
+            {
+                ...absenteeMock,
+                id: 3,
+                userId: 3,
+                type: 'sickness',
+            },
+            {
+                ...absenteeMock,
+                id: 4,
+                userId: 4,
+                type: 'vacation',
+            },
+            {
+                ...absenteeMock,
+                id: 5,
+                userId: 5,
+                type: 'vacation',
+            },
+        ];
+        mockAbsenteesModel.mockReturnValue(mockedAbsenteesModel);
+        const expectedResult: PageResults<Absentee> = {
+            offset: 0,
+            limit: 10,
+            totalNumberOfPages: 1,
+            totalRecords: 3,
+            results: [
+                {
+                    id: 1,
+                    userId: 1,
+                    type: 'sickness',
+                    memberNote: '',
+                    status: 'Confirmed',
+                    admitterNote: '',
+                    startDate: '2021-01-13',
+                    endDate: '2021-01-13',
+                },
+                {
+                    id: 2,
+                    userId: 2,
+                    type: 'sickness',
+                    memberNote: '',
+                    status: 'Confirmed',
+                    admitterNote: '',
+                    startDate: '2021-01-13',
+                    endDate: '2021-01-13',
+                },
+                {
+                    id: 3,
+                    userId: 3,
+                    type: 'sickness',
+                    memberNote: '',
+                    status: 'Confirmed',
+                    admitterNote: '',
+                    startDate: '2021-01-13',
+                    endDate: '2021-01-13',
+                },
+            ],
+        };
+        const absentees = getAbsentees(
+            { offset: 0, limit: 10 },
+            { type: 'sickness' }
+        );
         expect(absentees).toEqual(expectedResult);
     });
 });

@@ -1,6 +1,7 @@
 import { payload } from '../mock-data/absences.json';
 
 export type AbsenteeStatus = 'Requested' | 'Confirmed' | 'Rejected';
+export type AbsenteeType = 'vacation' | 'sickness';
 export interface AbsenteeModel {
     admitterId: number | null;
     admitterNote: string;
@@ -12,7 +13,7 @@ export interface AbsenteeModel {
     memberNote: string;
     rejectedAt: string | null;
     startDate: string | null;
-    type: string;
+    type: AbsenteeType;
     userId: number;
     status: AbsenteeStatus;
 }
@@ -37,6 +38,7 @@ export function getAbsenteesModel(): AbsenteeModel[] {
     return payload.map((data) => {
         return {
             ...data,
+            type: data.type === 'sickness' ? 'sickness' : 'vacation',
             status: getAbsenteeStatus({
                 rejectedAt: data.rejectedAt,
                 confirmedAt: data.confirmedAt,
