@@ -1,0 +1,14 @@
+.app-header {
+    background-color: var(--primary-color,#1976d2);
+    color: white;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    box-shadow: 1px 3px 5px gray;
+    position: sticky;
+    top: 0px;
+  }
+
+  .app-header .app-title {
+    margin: auto;
+  }
