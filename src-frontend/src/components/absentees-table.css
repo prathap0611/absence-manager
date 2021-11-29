@@ -35,6 +35,7 @@ td {
     display: flex;
     padding: 1rem;
     justify-content: space-between;
+    align-items: center;
 }
 
 tfoot td {
@@ -46,4 +47,8 @@ tfoot td {
     cursor: pointer;
 }
 
-
+.filter-container {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}

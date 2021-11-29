@@ -25,11 +25,13 @@ export type TypeFilter = 'vacation' | 'sickness' | '';
 export interface FetchAbsenteesConfig {
     currentPage: number;
     typeFilter: TypeFilter;
+    dateFilter: string;
 }
 
 export async function fetchAbsentees({
     currentPage,
-    typeFilter
+    typeFilter,
+    dateFilter
 }: FetchAbsenteesConfig): Promise<PaginatedAbsentees> {
     const limit = 10;
     const offset = currentPage * limit;
@@ -37,7 +39,8 @@ export async function fetchAbsentees({
         const queryParams = {
             offset: String(offset),
             limit: String(limit),
-            ...(typeFilter && {type: typeFilter})
+            ...(typeFilter && {type: typeFilter}),
+            ...(dateFilter && {date: dateFilter})
         };
         const response = await fetch(
             '/api/absentees?' + new URLSearchParams(queryParams)

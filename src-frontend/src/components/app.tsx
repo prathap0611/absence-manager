@@ -21,16 +21,17 @@ export default function App() {
     };
     const [currentPage, setCurrentPage] = useState(0);
     const [typeFilter, setTypeFilter] = useState<TypeFilter>("");
+    const [dateFilter, setDateFilter] = useState("");
 
     const { isLoading, data, error, doFetch } = useDataApi<
         PaginatedAbsentees,
         FetchAbsenteesConfig
-    >(initialValue, { currentPage, typeFilter }, fetchAbsentees);
+    >(initialValue, { currentPage, typeFilter, dateFilter }, fetchAbsentees);
 
     useEffect(() => {
-        doFetch({ currentPage, typeFilter });
+        doFetch({ currentPage, typeFilter, dateFilter });
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [currentPage, typeFilter]);
+    }, [currentPage, typeFilter, dateFilter]);
 
     return (
         <div>
@@ -43,6 +44,8 @@ export default function App() {
                         setCurrentPage={setCurrentPage}
                         typeFilter={typeFilter}
                         setTypeFilter={setTypeFilter}
+                        dateFilter={dateFilter}
+                        setDateFilter={setDateFilter}
                     />
                 </main>
             </ErrorBoundary>
