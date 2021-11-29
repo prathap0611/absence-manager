@@ -5,7 +5,7 @@ import { Absentee } from '../src/controllers/absentees.controller';
 describe('Absentee manager tests', () => {
     it('Should fetch list of absentees with default offset and limit', async () => {
         const response = await request(app)
-            .get('/absentees')
+            .get('/api/absentees')
             .set('Accept', 'application/json')
             .expect('Content-Type', /json/);
 
@@ -18,7 +18,7 @@ describe('Absentee manager tests', () => {
 
     it('Should fetch list of absentees with given offset and limit', async () => {
         const response = await request(app)
-            .get('/absentees')
+            .get('/api/absentees')
             .query({ offset: 5, limit: 7 })
             .set('Accept', 'application/json')
             .expect('Content-Type', /json/);
@@ -32,7 +32,7 @@ describe('Absentee manager tests', () => {
 
     it('Should filter list of absentees by type', async () => {
         const response = await request(app)
-            .get('/absentees')
+            .get('/api/absentees')
             .query({ type: 'vacation' })
             .set('Accept', 'application/json')
             .expect('Content-Type', /json/);
@@ -48,7 +48,7 @@ describe('Absentee manager tests', () => {
 
     it('Should filter list of absentees by date', async () => {
         const response = await request(app)
-            .get('/absentees')
+            .get('/api/absentees')
             .query({ date: '2021-06-26' })
             .set('Accept', 'application/json')
             .expect('Content-Type', /json/);
@@ -62,7 +62,7 @@ describe('Absentee manager tests', () => {
 
     it('Should return error for invalid offset ', async () => {
         await request(app)
-            .get('/absentees')
+            .get('/api/absentees')
             .query({
                 offset: 'not a number',
             })
@@ -73,7 +73,7 @@ describe('Absentee manager tests', () => {
 
     it('Should return error for invalid type ', async () => {
         await request(app)
-            .get('/absentees')
+            .get('/api/absentees')
             .query({
                 type: 'invalid type',
             })
@@ -84,7 +84,7 @@ describe('Absentee manager tests', () => {
 
     it('Should return error for invalid date ', async () => {
         await request(app)
-            .get('/absentees')
+            .get('/api/absentees')
             .query({
                 date: 'some date',
             })
@@ -95,7 +95,7 @@ describe('Absentee manager tests', () => {
 
     it('Should return error for invalid limit ', async () => {
         await request(app)
-            .get('/absentees')
+            .get('/api/absentees')
             .query({
                 limit: 'not a number',
             })
