@@ -1,0 +1,17 @@
+.pagination-group {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.page-info {
+    padding: 0 1rem;
+}
+
+.page-btn {
+    cursor: pointer;
+}
+
+button[disabled] {
+    pointer-events: none;
+}
