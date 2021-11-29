@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import moment from 'moment';
 import { PaginatedAbsentees } from '../services/api';
 import './absentees-table.css';
@@ -6,7 +6,7 @@ import './absentees-table.css';
 const tableHeaders = [
     'Name',
     'Type',
-    'Period',
+    'Period (Days)',
     'Status',
     'Member Note',
     'Admitter Note',
@@ -14,9 +14,25 @@ const tableHeaders = [
 
 export default function AbsenteesTable({
     absentees,
+    currentPage,
+    setCurrentPage,
 }: {
     absentees: PaginatedAbsentees;
+    currentPage: number;
+    setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
 }) {
+    const setPrevPage = useCallback(() => {
+        if (currentPage > 0) {
+            setCurrentPage(currentPage - 1);
+        }
+    }, [currentPage, setCurrentPage]);
+
+    const setNextPage = useCallback(() => {
+        if (currentPage < absentees.totalNumberOfPages) {
+            setCurrentPage(currentPage + 1);
+        }
+    }, [currentPage, setCurrentPage, absentees.totalNumberOfPages]);
+
     return (
         <section className="table-container">
             <section className="top-container">
@@ -51,6 +67,31 @@ export default function AbsenteesTable({
                         );
                     })}
                 </tbody>
+                <tfoot>
+                    <td colSpan={6}>
+                        <section className="pagination-group">
+                        <button
+                            className="page-btn"
+                            onClick={() => setPrevPage()}
+                            aria-label="previous page"
+                            disabled={currentPage <= 0}
+                        >
+                            &#9664;
+                        </button>
+                        <span className="page-info">{`${currentPage + 1} of ${
+                            absentees.totalNumberOfPages
+                        }`}</span>
+                        <button
+                            className="page-btn"
+                            onClick={() => setNextPage()}
+                            aria-label="next page"
+                            disabled={currentPage >= absentees.totalNumberOfPages - 1 }
+                        >
+                            &#9654;
+                        </button>
+                        </section>
+                    </td>
+                </tfoot>
             </table>
         </section>
     );
