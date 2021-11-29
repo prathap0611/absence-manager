@@ -20,8 +20,8 @@ export default function App() {
         results: [],
     };
     const [currentPage, setCurrentPage] = useState(0);
-    const [typeFilter, setTypeFilter] = useState<TypeFilter>("");
-    const [dateFilter, setDateFilter] = useState("");
+    const [typeFilter, setTypeFilter] = useState<TypeFilter>('');
+    const [dateFilter, setDateFilter] = useState('');
 
     const { isLoading, data, error, doFetch } = useDataApi<
         PaginatedAbsentees,
@@ -38,15 +38,20 @@ export default function App() {
             <ErrorBoundary>
                 <AppHeader />
                 <main>
-                    <AbsenteesTable
-                        absentees={data}
-                        currentPage={currentPage}
-                        setCurrentPage={setCurrentPage}
-                        typeFilter={typeFilter}
-                        setTypeFilter={setTypeFilter}
-                        dateFilter={dateFilter}
-                        setDateFilter={setDateFilter}
-                    />
+                    {error ? (
+                        <div className="error">{error.message}</div>
+                    ) : (
+                        <AbsenteesTable
+                            absentees={data}
+                            currentPage={currentPage}
+                            setCurrentPage={setCurrentPage}
+                            typeFilter={typeFilter}
+                            setTypeFilter={setTypeFilter}
+                            dateFilter={dateFilter}
+                            setDateFilter={setDateFilter}
+                            isLoading={isLoading}
+                        />
+                    )}
                 </main>
             </ErrorBoundary>
         </div>

@@ -1,0 +1,8 @@
+.error {
+    margin: 5rem 2rem;
+    display: flex;
+    justify-content: center;
+    border: 1px solid #e0e0e0;
+    flex-direction: column;
+    padding: 1rem;
+}

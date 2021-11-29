@@ -52,3 +52,7 @@ tfoot td {
     gap: 1rem;
     align-items: center;
 }
+
+.loader {
+    padding: 1rem;
+}

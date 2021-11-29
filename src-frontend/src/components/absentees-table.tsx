@@ -1,9 +1,10 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import moment from 'moment';
 import { PaginatedAbsentees, TypeFilter } from '../services/api';
 import './absentees-table.css';
 import Pagination from './pagination';
 import TableFilter from './filter';
+import LoadingIndicator from './loader';
 
 const tableHeaders = [
     'Name',
@@ -23,6 +24,7 @@ export default function AbsenteesTable({
     setTypeFilter,
     dateFilter,
     setDateFilter,
+    isLoading,
 }: {
     absentees: PaginatedAbsentees;
     currentPage: number;
@@ -31,6 +33,7 @@ export default function AbsenteesTable({
     setTypeFilter: React.Dispatch<React.SetStateAction<TypeFilter>>;
     dateFilter: string;
     setDateFilter: React.Dispatch<React.SetStateAction<string>>;
+    isLoading: boolean;
 }) {
     return (
         <section className="table-container">
@@ -55,36 +58,45 @@ export default function AbsenteesTable({
                     </tr>
                 </thead>
                 <tbody>
-                    {absentees.results.map((absentee) => {
-                        const startDate = moment(absentee.startDate).format(
-                            'DD/MM/YYYY'
-                        );
-                        const endDate = moment(absentee.endDate).format(
-                            'DD/MM/YYYY'
-                        );
-                        return (
-                            <tr key={absentee.id}>
-                                <td>{absentee.userName}</td>
-                                <td>{absentee.type}</td>
-                                <td>{startDate}</td>
-                                <td>{endDate}</td>
-                                <td>{absentee.status}</td>
-                                <td>{absentee.memberNote}</td>
-                                <td>{absentee.admitterNote}</td>
+                    <LoadingIndicator isLoading={isLoading}>
+                        {!absentees.results.length && (
+                            <tr>
+                                <td>No Matching Record</td>
                             </tr>
-                        );
-                    })}
+                        )}
+                        {absentees.results.map((absentee) => {
+                            const startDate = moment(absentee.startDate).format(
+                                'DD/MM/YYYY'
+                            );
+                            const endDate = moment(absentee.endDate).format(
+                                'DD/MM/YYYY'
+                            );
+                            return (
+                                <tr key={absentee.id}>
+                                    <td>{absentee.userName}</td>
+                                    <td>{absentee.type}</td>
+                                    <td>{startDate}</td>
+                                    <td>{endDate}</td>
+                                    <td>{absentee.status}</td>
+                                    <td>{absentee.memberNote}</td>
+                                    <td>{absentee.admitterNote}</td>
+                                </tr>
+                            );
+                        })}
+                    </LoadingIndicator>
                 </tbody>
                 <tfoot>
                     <tr>
                         <td colSpan={7}>
-                            <Pagination
-                                currentPage={currentPage}
-                                setCurrentPage={setCurrentPage}
-                                totalNumberOfPages={
-                                    absentees.totalNumberOfPages
-                                }
-                            />
+                            {absentees.results.length ? (
+                                <Pagination
+                                    currentPage={currentPage}
+                                    setCurrentPage={setCurrentPage}
+                                    totalNumberOfPages={
+                                        absentees.totalNumberOfPages
+                                    }
+                                />
+                            ) : null}
                         </td>
                     </tr>
                 </tfoot>
