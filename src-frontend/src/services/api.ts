@@ -20,22 +20,27 @@ export interface PaginatedAbsentees {
     results: Absentee[];
 }
 
+export type TypeFilter = 'vacation' | 'sickness' | '';
+
 export interface FetchAbsenteesConfig {
     currentPage: number;
+    typeFilter: TypeFilter;
 }
 
 export async function fetchAbsentees({
     currentPage,
+    typeFilter
 }: FetchAbsenteesConfig): Promise<PaginatedAbsentees> {
     const limit = 10;
     const offset = currentPage * limit;
     try {
+        const queryParams = {
+            offset: String(offset),
+            limit: String(limit),
+            ...(typeFilter && {type: typeFilter})
+        };
         const response = await fetch(
-            '/api/absentees?' +
-                new URLSearchParams({
-                    offset: String(offset),
-                    limit: String(limit),
-                })
+            '/api/absentees?' + new URLSearchParams(queryParams)
         );
         const absentees: PaginatedAbsentees = await response.json();
         return absentees;

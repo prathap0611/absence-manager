@@ -41,8 +41,9 @@ tfoot td {
     text-align: right;
 }
 
-
-
-
+.type-filter {
+    padding: 0.5rem;
+    cursor: pointer;
+}
 
 
