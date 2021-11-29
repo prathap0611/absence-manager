@@ -1,8 +1,10 @@
 import React from 'react';
 import { useDataApi } from '../hooks/use-data-api';
 import { fetchAbsentees, PaginatedAbsentees } from '../services/api';
+import AbsenteesTable from './absentees-table';
 import AppHeader from './app-header';
 import ErrorBoundary from './error-boundary';
+import './app.css';
 
 export default function App() {
     const initialValue: PaginatedAbsentees = {
@@ -18,13 +20,13 @@ export default function App() {
         fetchAbsentees
     );
 
-    console.log(data);
-
     return (
         <div>
             <ErrorBoundary>
                 <AppHeader />
-                <main></main>
+                <main>
+                    <AbsenteesTable absentees={data} />
+                </main>
             </ErrorBoundary>
         </div>
     );

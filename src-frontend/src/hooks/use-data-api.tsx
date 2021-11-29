@@ -1,4 +1,4 @@
-import { useEffect, useReducer, useState } from 'react';
+import { Reducer, useEffect, useReducer, useState } from 'react';
 
 interface DataApiState<T> {
   isLoading: boolean;
@@ -41,7 +41,7 @@ export function useDataApi<T, U>(
   fetchApi: (config: U) => Promise<T>
 ) {
   const [requestConfig, setRequestConfig] = useState(initialConfig);
-  const [state, dispatch] = useReducer(dataFetchReducer, {
+  const [state, dispatch] = useReducer<Reducer<DataApiState<T>, Action<T>>>(dataFetchReducer, {
     isLoading: false,
     data: initialData,
     error: undefined,

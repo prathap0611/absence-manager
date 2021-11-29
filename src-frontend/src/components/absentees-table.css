@@ -1,0 +1,43 @@
+.table-container {
+    margin: 5rem 2rem;
+    display: flex;
+    justify-content: center;
+    box-shadow: 1px 3px 5px #e0e0e0;
+    border: 1px solid #e0e0e0;
+    flex-direction: column;
+}
+
+table {
+    table-layout: fixed;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+thead th {
+    width: 16%;
+}
+
+tbody th,tr {
+    border-bottom: 1px solid #e0e0e0;
+}
+
+tbody td {
+    text-align: center;
+    text-overflow: ellipsis;
+}
+
+th,
+td {
+    padding: 1rem;
+}
+
+.top-container {
+    display: flex;
+    padding: 1rem;
+    justify-content: space-between;
+}
+
+
+
+
+
