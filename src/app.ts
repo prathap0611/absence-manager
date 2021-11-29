@@ -1,5 +1,6 @@
 import express from 'express';
 import helmet from 'helmet';
+import path from 'path';
 import { errorHandler } from './middleware/error-handler';
 import { buildRoutes } from './routes';
 
@@ -13,8 +14,11 @@ buildRoutes(app);
 
 app.use(errorHandler);
 
-app.use((req, res) => {
-    res.sendStatus(404);
+const buildPath = path.join(__dirname, '..', 'src-frontend', 'build');
+app.use(express.static(buildPath));
+
+app.get('/*', function (req, res) {
+    res.sendFile(path.join(buildPath, 'index.html'));
 });
 
 export default app;
