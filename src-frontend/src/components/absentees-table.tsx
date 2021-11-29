@@ -1,6 +1,6 @@
 import React from 'react';
 import moment from 'moment';
-import { Absentee, PaginatedAbsentees } from '../services/api';
+import { PaginatedAbsentees } from '../services/api';
 import './absentees-table.css';
 
 const tableHeaders = [
@@ -41,7 +41,7 @@ export default function AbsenteesTable({
                             endDate.diff(startDate, 'days') + 1; // To include start date
                         return (
                             <tr key={absentee.id}>
-                                <td>{absentee.id}</td>
+                                <td>{absentee.userName}</td>
                                 <td>{absentee.type}</td>
                                 <td>{periodInDays}</td>
                                 <td>{absentee.status}</td>

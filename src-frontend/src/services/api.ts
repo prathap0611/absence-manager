@@ -3,7 +3,7 @@ export type AbsenteeType = 'vacation' | 'sickness';
 
 export interface Absentee {
     id: number;
-    userId: number;
+    userName: string;
     type: AbsenteeType;
     startDate: string | null;
     endDate: string | null;

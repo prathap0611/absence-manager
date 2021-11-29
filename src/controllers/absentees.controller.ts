@@ -5,11 +5,12 @@ import {
     AbsenteeType,
     getAbsenteesModel,
 } from '../model/absentees.model';
+import { getUser } from '../model/user.model';
 import { PageInput, PageResults, paginate } from '../utils/pagination';
 
 export interface Absentee {
     id: number;
-    userId: number;
+    userName: string;
     type: AbsenteeType;
     startDate: string | null;
     endDate: string | null;
@@ -28,9 +29,10 @@ function transformAbsenteeFromModel({
     startDate,
     endDate,
 }: AbsenteeModel): Absentee {
+    const userName = getUser(userId)?.name || String(userId);
     return {
         id,
-        userId,
+        userName,
         type,
         memberNote,
         status,

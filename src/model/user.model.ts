@@ -8,6 +8,15 @@ export interface User {
     userId: number;
 }
 
+const userIdMap = payload.reduce<Map<number, User>>((agg, user) => {
+    agg.set(user.userId, user);
+    return agg;
+}, new Map());
+
 export function getUsers(): User[] {
     return payload;
+}
+
+export function getUser(id: number) {
+    return userIdMap.get(id);
 }
