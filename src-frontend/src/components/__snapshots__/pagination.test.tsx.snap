@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Pagination Tests should render the page correctly 1`] = `
+<DocumentFragment>
+  <section
+    class="pagination-group"
+  >
+    <button
+      aria-label="previous page"
+      class="page-btn"
+      data-testid="prev-page"
+      disabled=""
+    >
+      ◀
+    </button>
+    <span
+      class="page-info"
+    >
+      1 of 5
+    </span>
+    <button
+      aria-label="next page"
+      class="page-btn"
+      data-testid="next-page"
+    >
+      ▶
+    </button>
+  </section>
+</DocumentFragment>
+`;

@@ -39,6 +39,7 @@ export default function TableFilter({
                     value={typeFilter}
                     className="type-filter"
                     onChange={applyTypeFilter}
+                    data-testid="type-filter"
                 >
                     <option value={''}>Filter by type</option>
                     <option value="vacation">Vacation</option>
@@ -53,6 +54,7 @@ export default function TableFilter({
                     value={dateFilter}
                     className="date-filter"
                     onChange={applyDateFilter}
+                    data-testid="date-filter"
                 />
             </label>
         </section>

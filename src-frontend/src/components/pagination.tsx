@@ -29,6 +29,7 @@ export default function Pagination({
                 onClick={() => setPrevPage()}
                 aria-label="previous page"
                 disabled={currentPage <= 0}
+                data-testid="prev-page"
             >
                 &#9664;
             </button>
@@ -40,6 +41,7 @@ export default function Pagination({
                 onClick={() => setNextPage()}
                 aria-label="next page"
                 disabled={currentPage >= totalNumberOfPages - 1}
+                data-testid="next-page"
             >
                 &#9654;
             </button>

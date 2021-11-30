@@ -1,0 +1,174 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`filter tests should render the page correctly 1`] = `
+<DocumentFragment>
+  <section
+    class="table-container"
+  >
+    <section
+      class="top-container"
+    >
+      <section
+        class="filter-container"
+      >
+        <label
+          for="type-filter"
+        >
+          Choose filter type: 
+          <select
+            class="type-filter"
+            data-testid="type-filter"
+            id="type-filter"
+          >
+            <option
+              value=""
+            >
+              Filter by type
+            </option>
+            <option
+              value="vacation"
+            >
+              Vacation
+            </option>
+            <option
+              value="sickness"
+            >
+              Sickness
+            </option>
+          </select>
+        </label>
+        <label
+          for="date-filter"
+        >
+          Choose filter date: 
+          <input
+            class="date-filter"
+            data-testid="date-filter"
+            id="date-filter"
+            type="date"
+            value="03/11/2020"
+          />
+        </label>
+      </section>
+      <div
+        class="absentees-count"
+      >
+        Total Absentees 42
+      </div>
+    </section>
+    <table>
+      <thead>
+        <tr>
+          <th
+            scope="col"
+          >
+            Name
+          </th>
+          <th
+            scope="col"
+          >
+            Type
+          </th>
+          <th
+            scope="col"
+          >
+            Start Date
+          </th>
+          <th
+            scope="col"
+          >
+            End Date
+          </th>
+          <th
+            scope="col"
+          >
+            Status
+          </th>
+          <th
+            scope="col"
+          >
+            Member Note
+          </th>
+          <th
+            scope="col"
+          >
+            Admitter Note
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            user 1
+          </td>
+          <td>
+            sickness
+          </td>
+          <td>
+            12/05/2020
+          </td>
+          <td>
+            12/05/2020
+          </td>
+          <td>
+            Confirmed
+          </td>
+          <td />
+          <td />
+        </tr>
+        <tr>
+          <td>
+            user 2
+          </td>
+          <td>
+            vacation
+          </td>
+          <td>
+            12/05/2020
+          </td>
+          <td>
+            12/05/2020
+          </td>
+          <td>
+            Rejected
+          </td>
+          <td />
+          <td />
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td
+            colspan="7"
+          >
+            <section
+              class="pagination-group"
+            >
+              <button
+                aria-label="previous page"
+                class="page-btn"
+                data-testid="prev-page"
+                disabled=""
+              >
+                ◀
+              </button>
+              <span
+                class="page-info"
+              >
+                1 of 5
+              </span>
+              <button
+                aria-label="next page"
+                class="page-btn"
+                data-testid="next-page"
+              >
+                ▶
+              </button>
+            </section>
+          </td>
+        </tr>
+      </tfoot>
+    </table>
+  </section>
+</DocumentFragment>
+`;

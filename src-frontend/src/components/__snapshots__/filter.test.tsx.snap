@@ -1,0 +1,48 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`filter tests should render the page correctly 1`] = `
+<DocumentFragment>
+  <section
+    class="filter-container"
+  >
+    <label
+      for="type-filter"
+    >
+      Choose filter type: 
+      <select
+        class="type-filter"
+        data-testid="type-filter"
+        id="type-filter"
+      >
+        <option
+          value=""
+        >
+          Filter by type
+        </option>
+        <option
+          value="vacation"
+        >
+          Vacation
+        </option>
+        <option
+          value="sickness"
+        >
+          Sickness
+        </option>
+      </select>
+    </label>
+    <label
+      for="date-filter"
+    >
+      Choose filter date: 
+      <input
+        class="date-filter"
+        data-testid="date-filter"
+        id="date-filter"
+        type="date"
+        value="03/11/2020"
+      />
+    </label>
+  </section>
+</DocumentFragment>
+`;
